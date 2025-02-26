@@ -57,7 +57,9 @@ class Cache {
       return value
     }
     value = await fn()
-    await this.setCache(key, value, ttl)
+    if(value !== NOT_FOUND_VALUE) {
+      await this.setCache(key, value, ttl)
+    }
     return value
   }
 

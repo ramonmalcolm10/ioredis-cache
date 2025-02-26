@@ -166,6 +166,15 @@ describe('Cache', () => {
         expect(result).toBe(1)
       })
     })
+
+    describe('when pass undefined value', () => {
+      it('does not cache undefined value', async () => {
+        let result: any = await cache.cache(key, () => undefined)
+        expect(result).toBe(undefined)
+        result = await cache.redis.get(key)
+        expect(result).toBe(null)
+      })
+    })
   })
 
   describe('#getCache', () => {
